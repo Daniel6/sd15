@@ -1,0 +1,1 @@
+Protein BLAST says that this long protein is in fact a Type 3 Secretion System Protein of salmonella. This is a virulence factor in salmonella that allows it to infect the host's cells. This finding would indicate that the sample that this protein sequence was taken from has salmonella in it.
