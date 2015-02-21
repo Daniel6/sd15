@@ -23,7 +23,7 @@ def build_random_function(min_depth, max_depth):
         curr_depth = depth + 1;
         if curr_depth > set_depth:
             #return "t"
-            return ["x", "y", "t"][random.randint(0,2)]
+            return ["x",  "y", "t"][random.randint(0,2)]
         choice = random.choice(blocks)
         if choice=="prod" or "avg":
             return [choice, chooseBlock(curr_depth), chooseBlock(curr_depth), chooseBlock(curr_depth)]
@@ -154,6 +154,7 @@ def generate_art(x_size=350, y_size=350):
     num_frames = 120
     for k in range(num_frames):
         filename = "./movieframes/frame"+str(k).zfill(3)+".png"
+        # filename = "./art"+str(k).zfill(3)+".png"
         progress = remap_interval(k, 0, num_frames, -1, 1)
         print(progress)
         im = Image.new("RGB", (x_size, y_size))
@@ -174,8 +175,8 @@ def generate_art(x_size=350, y_size=350):
 if __name__ == '__main__':
     # import doctest
     # doctest.testmod()
-    # generate_art()
-    movie("./moveframes/frame*.png", fps=30, output_file="./movie.gif")
+    generate_art()
+    # movie("./moveframes/frame*.png", fps=30, output_file="./movie.gif")
     # Create some computational art!
     # TODO: Un-comment the generate_art function call after you
     #       implement remap_interval and evaluate_random_function
