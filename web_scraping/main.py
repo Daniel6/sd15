@@ -4,8 +4,8 @@ import sys
 
 #User input here since subl doesn't handle that
 currentSystem="Jita"
-endSystem="Amarr"
-item = "Tritanium"
+endSystem="Rens"
+item = "Merlin"
 
 #Check whether system names are valid
 systems = file('systems.txt')

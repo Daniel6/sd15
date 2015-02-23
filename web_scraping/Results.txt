@@ -1,0 +1,8 @@
+I found this tool to be mildly effective at making money in EvE Online, but it is still vastly outclassed by human intuition. If I was given more time, I would factor in different volumes of buy orders in different regions as well as filling multiple order in one trip.
+
+Right now the tool returns some useful results that I could act on such as telling me that I can make a profit of 42,614 ISK(monies) by hauling Rifters 4 jumps from Inaro 7-4 to Jita 4-4. This is an example of a profitable haul, however due to the nature of EvE, these hauls are far from optimal due to the constantly changing nature of the economy. While this haul is indeed profitable, it might be more efficient to buy Rifters and then use them to populate a market region that contains no Rifters, thereby defining your own price. However this functionality is out of the scope of this project as it involves determining the potential demand for a product in which that product does not currently exist, theoretically a machine learning algorithm would be a good fit for this kind of work.
+
+Some other interesting results include:
+A profit of 211,574 ISK for hauling Veldspar 10 jumps from Algogille 13 to Jit 4-4.
+
+A profit of 800,003 ISK for hauling Merlins 14 jumps from Renyn 10-14 to Rens 6-8.

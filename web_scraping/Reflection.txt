@@ -1,0 +1,5 @@
+For this project the integration with the EvE-Central API and EvE-Online static databases was very easy as both have been made readily available to the public and have documentation. However I did find the EvE-Central API to be a bit lacking as I had initially wanted to search for buy orders in a radius around the current system, but found that the API only let me search in regions and specific systems. In order to work around this I would have had to identify each and every system in a radius around a given system. Given that each system can have as many as 6+ connections to other systems, this would have been a very arduous and intensive process.
+
+The tool itself could also use some work in improving its identification of the "best" haul. Right now it only considers volume and price difference, but the best profits in EvE come from populating new markets and identifying unsatisfied demand for a new product. Alternatively, using large existing capital to leverage profits by manipulating market prices.
+
+Overall for the scope of this project, this was a success in achieving the meta goals (learn about web-scraping, implement 3rd party API's).

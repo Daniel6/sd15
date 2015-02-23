@@ -1,0 +1,5 @@
+To achieve my goal I first used my static databases to convert from system/item names to unique ID's. Then I polled the EvE-Central database for the lowest sell order for the selected item in the selected system (selected system being the system you are currently in). Having found t he cheapest sell order, I then look at all the systems along the path from the current system to the destination, I do this to see if there is a shorter route that I could take that would give me more profit than my original plan. 
+
+From all the systems along the path to my destination, I look at all the buy orders in each system, and find the buy order with the highest price. 
+
+If this price is higher than the sell order price, then there is profit to be made, and the program returns the potential profit, how many jumps you have to go, and what stations are involved. The potential profit is calculated by looking at the difference in prices, and looking at how many of the item can be moved at that price (eg: a sell order goes up for 100 units, but the corresponding buy order only wants 80 units, so you can only profit off of 80 units not 100).
