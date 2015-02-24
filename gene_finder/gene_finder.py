@@ -2,7 +2,7 @@
 """
 Created on Sun Feb  2 11:24:42 2014
 
-@author: YOUR NAME HERE
+@author: Daniel :)
 
 """
 
@@ -35,7 +35,7 @@ def get_complement(nucleotide):
     >>> get_complement('Z')
     ''
     """
-    # TODO: implement this
+    # TODO: implement this    <--Delete this stuff, keep your code clean
     if nucleotide=='A':
         return 'T'
     elif nucleotide=='T':
@@ -45,7 +45,8 @@ def get_complement(nucleotide):
     elif nucleotide=='C':
         return 'G'
     else:
-        return ""
+        return "Nucleotide not found" 
+        #It would be good practice to return something here that states an error--easy debugging
 
 def get_reverse_complement(dna):
     """ Computes the reverse complementary sequence of DNA for the specfied DNA
@@ -63,6 +64,7 @@ def get_reverse_complement(dna):
     for c in dna[::-1]:
         res = res + get_complement(c);
     return res;
+    #Why are there semicolons here? C/C++ is cool, but remove these because we're in python
 
 def rest_of_ORF(dna):
     """ 
@@ -88,11 +90,13 @@ def rest_of_ORF(dna):
     current_codon = "ATG"
     index = 0;
     while current_codon not in end_codons and index < len(dna):
-        index = index + 3;
+        #index = index + 3;
+        index += 3
         try:
             current_codon = dna[index:index+3]
         except IndexError:
             break;
+        #Interesting use of exceptions here
     return dna[:index]
 
 def find_all_ORFs_oneframe(dna):
@@ -112,14 +116,19 @@ def find_all_ORFs_oneframe(dna):
     >>> find_all_ORFs_oneframe("ATGCATGAATAGATGGCCCGGTAGATGTGTTTTAAACCCGGGTAG")
     ['ATGCATGAA', 'ATGGCCCGG', 'ATGTGTTTTAAACCCGGG']
     """
-    # TODO: implement this
+    
+    """
+    OK function, but you should be calling rest_of_ORF.
+    Avoid using nested if statements in the future. This function is difficult to understand at first glance
+    and readable code is best code. (seriously though)"""
+    
     #print dna
     stop_codons = ['TAG', 'TGA', 'TAA']
     opened = False
     orf = ""
     orfs = []
-    for i in range(0, len(dna)):
-        if dna[i:i+3]=='ATG' and i%3==0 and opened==False:
+    for i in range(0, len(dna)): #just use range(0, len(dna), 3)?
+        if dna[i:i+3]=='ATG' and i%3==0 and opened==False: #This is messy
             opened=True
         if opened==True:
             if dna[i:i+3] in stop_codons and i%3==0:
@@ -127,11 +136,12 @@ def find_all_ORFs_oneframe(dna):
                 orfs.append(orf)
                 orf=""
             else:
-                orf = orf + dna[i]
+                orf = orf + dna[i] #this isn't really an orf is it? It's a nucleotide string--name your variables wisely
     if orf!="":
         orfs.append(orf)
         orf=""
     return orfs
+
 
 def find_all_ORFs(dna):
     """ Finds all non-nested open reading frames in the given DNA sequence in all 3
@@ -155,6 +165,9 @@ def find_all_ORFs(dna):
     #for index in start_indexes:
     #    orfs.append(rest_of_ORF(dna[index:]))
     #return orfs
+    """
+    Delete your test code in your final turn in.
+    """
 
 
 def find_all_ORFs_both_strands(dna):
@@ -191,9 +204,10 @@ def longest_ORF(dna):
     try:
         return max(find_all_ORFs_both_strands(dna), key=len);
     except ValueError:
-        return ""
+        return "Value error in longest_ORF"
     except TypeError:
-        return ""
+        return "TypeError in longest_ORF"
+    #Nice error catching, but make your return statements say something useful
 
 
 def longest_ORF_noncoding(dna, num_trials):
@@ -212,8 +226,11 @@ def longest_ORF_noncoding(dna, num_trials):
         45
         """
     # TODO: implement this
+    
+    """This function is broken. Your threshold is ~1070, when it should be around 600-700."""
+    
     strand = dna
-    max_len = len(longest_ORF(strand))
+    max_len = 0 #change this
     max_orf = ""
     for i in range(num_trials):
         strand = "".join(random.sample(strand, len(strand)))
