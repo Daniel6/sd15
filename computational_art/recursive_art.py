@@ -1,4 +1,4 @@
-""" TODO: Put your header comment here """
+""" TODO: Put your header comment here """ #Where's header comment?
 
 import random
 from math import cos, sin, pi
@@ -19,27 +19,27 @@ def build_random_function(min_depth, max_depth):
     """
     blocks = ["prod", "sin_pi", "cos_pi", "foo", "foobar", "avg"]
     set_depth = random.randint(min_depth, max_depth)
+    """
+    Don't define functions inside functions. This implementation makes it hard to debug in more complex projects,
+    and has no real benefits. You're only calling the function in one place, so just integrate chooseBlock into 
+    build_random_function
+    """
     def chooseBlock(depth):
         curr_depth = depth + 1;
         if curr_depth > set_depth:
-            #return "t"
-            return ["x",  "y", "t"][random.randint(0,2)]
+            return ["x", "y", "t"][random.randint(0,2)]
         choice = random.choice(blocks)
-        if choice=="prod" or "avg":
+        if choice=="prod" or "avg": #these should only require 2 blocks
             return [choice, chooseBlock(curr_depth), chooseBlock(curr_depth), chooseBlock(curr_depth)]
-        elif choice=="sin_pi" or "cos_pi":
-            return [choice, chooseBlock(curr_depth), chooseBlock(curr_depth)]
-        else:
+        elif choice=="sin_pi" or "cos_pi": #sin and cos only require one block
+            return [choice, chooseBlock(curr_depth), chooseBlock(curr_depth)] 
+        else: #what does this account for?
             return [choice, chooseBlock(curr_depth)]
-    res = chooseBlock(0)
+    res = chooseBlock(0) #why initialize function like this? when would you not want depth to start at 0?
     return res
-# f = ["prod",["sin_pi",["x"]],["cos_pi",["x"]]]
-# f[0] = "prod"
-# f[1] = ["sin_pi",["x"]]
-#   f[0] = "sin_pi"
-#   f[1] = ["x"]
-#     f[0] = "x"
-# f[2] = ["cos_pi",["x"]]
+    
+#Delete unncessary test code in final turn in    
+
 def evaluate_random_function(f, x, y, t):
     """ Evaluate the random function f with inputs x,y
         Representation of the function f is defined in the assignment writeup
@@ -55,15 +55,15 @@ def evaluate_random_function(f, x, y, t):
         return y
     elif f[0]=="t":
         return t
-    elif f[0]=="prod":
+    elif f[0]=="prod": #again, I'm not sure why you want to use 3 blocks in this
         return evaluate_random_function(f[1], x, y, t) * evaluate_random_function(f[2], x, y, t) * evaluate_random_function(f[3], x, y, t)
     elif f[0]=="avg":
         return (1/3.0) * (evaluate_random_function(f[1], x, y, t) + evaluate_random_function(f[2], x, y, t) + evaluate_random_function(f[3], x, y, t))
-    elif f[0]=="sin_pi":
+    elif f[0]=="sin_pi": #Design choice, which is fine, but your art comes out looking too complex
         return sin(pi * evaluate_random_function(f[1], x, y, t) * evaluate_random_function(f[2], x, y, t))
     elif f[0]=="cos_pi":
         return cos(pi * evaluate_random_function(f[1], x, y, t) * evaluate_random_function(f[2], x, y, t))
-    elif f[0]=="foo":
+    elif f[0]=="foo": #foo and foobar are not descriptive enough, use descriptive variable names always
         return evaluate_random_function(f[1], x, y, t)*5*t
     elif f[0]=="foobar":
         return evaluate_random_function(f[1], x, y, t)**2
@@ -96,8 +96,8 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
         >>> remap_interval(5, 4, 6, 1, 2)
         1.5
     """
-    return (output_interval_end - output_interval_start) * 1.0 * (val - input_interval_start)/(input_interval_end - input_interval_start) + output_interval_start
-
+    return (output_interval_end - output_interval_start)(val - input_interval_start)./(input_interval_end - input_interval_start) + output_interval_start
+    #put a period before the division sign to automatically float, don't need to multiply by 1.0
 
 def color_map(val):
     """ Maps input value between -1 and 1 to an integer 0-255, suitable for
@@ -153,6 +153,7 @@ def generate_art(x_size=350, y_size=350):
     # Create image and loop over all pixels
     num_frames = 120
     for k in range(num_frames):
+        #Nice use of automatic naming
         filename = "./movieframes/frame"+str(k).zfill(3)+".png"
         # filename = "./art"+str(k).zfill(3)+".png"
         progress = remap_interval(k, 0, num_frames, -1, 1)
@@ -173,15 +174,9 @@ def generate_art(x_size=350, y_size=350):
 
 
 if __name__ == '__main__':
+    
+    #Delete this stuff, don't include in final turn in
     # import doctest
     # doctest.testmod()
     generate_art()
-    # movie("./moveframes/frame*.png", fps=30, output_file="./movie.gif")
-    # Create some computational art!
-    # TODO: Un-comment the generate_art function call after you
-    #       implement remap_interval and evaluate_random_function
-    #generate_art("myart.png")
-
-    # Test that PIL is installed correctly
-    # TODO: Comment or remove this function call after testing PIL install
     #test_image("noise.png")
