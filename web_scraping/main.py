@@ -2,7 +2,8 @@ import urllib2
 from xml.etree import ElementTree
 import sys
 
-#User input here since subl doesn't handle that
+#User input here since subl doesn't handle that  
+#Yes, but terminal can. Don't shy from using raw_input to make your code interactable
 currentSystem="Jita"
 endSystem="Rens"
 item = "Merlin"
@@ -16,7 +17,9 @@ if currentSystem+"\n" not in systems:
 systems = file('systems.txt')
 if endSystem+"\n" not in systems:
 	print endSystem, "not in system database."
-	sys.exit()
+	sys.exit() #You shouldn't have to use this, make sure all your code is enveloped in functions
+
+#You can combine the two functions into one.
 
 #Local DB with item names and id's
 item_data = file('items.txt')
@@ -31,7 +34,7 @@ if item_id=="":
 	sys.exit()
 else:
 	#Grab data on buy and sell orders for item in all systems between currentSystem and endSystem
-	try:
+	try: #Nice job on error catching
 		root = ElementTree.fromstring(urllib2.urlopen("http://api.eve-central.com/api/quicklook/onpath/from/"+currentSystem+"/to/"+endSystem+"/fortype/"+item_id).read())
 	except:
 		print "Error querying the database"
@@ -54,6 +57,7 @@ for order in quicklook.find("buy_orders"):
 	buy_orders.append((float(key), order))
 buy_orders.sort()
 highest_buy = buy_orders[-1][1]
+#These two loops can be easily be placed inside a function that's called twice so you aren't repeating so much code
 
 if lowest_sell.findtext("price") > highest_buy.findtext("price"):
 	print "No Profitable Haul Found." #Buying high and selling low is counter-productive
